@@ -51,13 +51,11 @@ a {
   text-align: center;
 }
 
-.brand {
-  margin: 0 0 1.25rem;
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
+.brand-logo {
+  display: inline-block;
+  height: 40px;
+  width: auto;
+  margin-bottom: 1.25rem;
 }
 
 .topbar h1 {

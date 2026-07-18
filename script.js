@@ -57,6 +57,7 @@ const seedProfiles = [
     oficioLabel: "Gasfitera",
     icon: "🔧",
     foto: "assets/fotos/gasfiteria-antes-despues.jpg",
+    fotoTrabajando: "assets/fotos/gasfiter-trabajando.jpg",
     experiencia: 8,
     zona: "Providencia, Santiago",
     certificacion: "tramite",
@@ -70,6 +71,7 @@ const seedProfiles = [
     oficioLabel: "Electricista",
     icon: "⚡",
     foto: "assets/fotos/electricidad-antes-despues.jpg",
+    fotoTrabajando: "assets/fotos/electricista-trabajando.jpg",
     experiencia: 20,
     zona: "Valparaíso",
     certificacion: "verificado",
@@ -328,6 +330,21 @@ profileForm.addEventListener("submit", (e) => {
   closeFormModal();
 });
 
+function buildPhotoFigure(src, alt, caption) {
+  const figure = document.createElement("figure");
+  figure.className = "detail-photo";
+
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = alt;
+
+  const figcaption = document.createElement("figcaption");
+  figcaption.textContent = caption;
+
+  figure.append(img, figcaption);
+  return figure;
+}
+
 function openDetailModal(profile) {
   detailContent.innerHTML = "";
   detailContent.className = "";
@@ -337,19 +354,16 @@ function openDetailModal(profile) {
   summary.append(renderProfileBody(profile));
   detailContent.append(summary);
 
+  if (profile.fotoTrabajando) {
+    detailContent.append(
+      buildPhotoFigure(profile.fotoTrabajando, `${profile.nombre} trabajando en terreno`, "Trabajando en terreno")
+    );
+  }
+
   if (profile.foto) {
-    const figure = document.createElement("figure");
-    figure.className = "detail-photo";
-
-    const img = document.createElement("img");
-    img.src = profile.foto;
-    img.alt = `Trabajo realizado por ${profile.nombre} — antes y después`;
-
-    const caption = document.createElement("figcaption");
-    caption.textContent = "Antes y después de un trabajo realizado";
-
-    figure.append(img, caption);
-    detailContent.append(figure);
+    detailContent.append(
+      buildPhotoFigure(profile.foto, `Trabajo realizado por ${profile.nombre} — antes y después`, "Antes y después de un trabajo realizado")
+    );
   }
 
   detailModalOverlay.hidden = false;

@@ -27,73 +27,11 @@
       <button class="filter-chip" data-oficio="electricidad">Electricidad</button>
     </section>
 
-    <section class="profile-list" id="profileList">
-
-      <article class="profile-card" data-oficio="lena">
-        <div class="avatar">🪓</div>
-        <div class="info">
-          <div class="info-header">
-            <h2>Juan Pérez</h2>
-            <span class="badge verified">✔ Verificado</span>
-          </div>
-          <p class="oficio">Leñero</p>
-          <ul class="details">
-            <li><strong>Edad:</strong> 45 años</li>
-            <li><strong>Experiencia:</strong> 12 años</li>
-            <li><strong>Zona:</strong> Temuco, Araucanía</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="profile-card" data-oficio="gasfiteria">
-        <div class="avatar">🔧</div>
-        <div class="info">
-          <div class="info-header">
-            <h2>María González</h2>
-            <span class="badge pending">⏳ En trámite</span>
-          </div>
-          <p class="oficio">Gasfitera</p>
-          <ul class="details">
-            <li><strong>Edad:</strong> 38 años</li>
-            <li><strong>Experiencia:</strong> 8 años</li>
-            <li><strong>Zona:</strong> Providencia, Santiago</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="profile-card" data-oficio="electricidad">
-        <div class="avatar">⚡</div>
-        <div class="info">
-          <div class="info-header">
-            <h2>Carlos Muñoz</h2>
-            <span class="badge verified">✔ Verificado</span>
-          </div>
-          <p class="oficio">Electricista</p>
-          <ul class="details">
-            <li><strong>Edad:</strong> 52 años</li>
-            <li><strong>Experiencia:</strong> 20 años</li>
-            <li><strong>Zona:</strong> Valparaíso</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="profile-card" data-oficio="lena">
-        <div class="avatar">🪵</div>
-        <div class="info">
-          <div class="info-header">
-            <h2>Rosa Fuentes</h2>
-            <span class="badge pending">⏳ En trámite</span>
-          </div>
-          <p class="oficio">Leñera</p>
-          <ul class="details">
-            <li><strong>Edad:</strong> 41 años</li>
-            <li><strong>Experiencia:</strong> 6 años</li>
-            <li><strong>Zona:</strong> Los Ángeles, Biobío</li>
-          </ul>
-        </div>
-      </article>
-
+    <section class="actions">
+      <button type="button" class="btn-primary" id="addProfileBtn">+ Agregar perfil</button>
     </section>
+
+    <section class="profile-list" id="profileList"></section>
 
     <p class="empty-state" id="emptyState" hidden>No se encontraron perfiles con esos criterios.</p>
 
@@ -102,6 +40,63 @@
   <footer class="footer">
     <p>Prototipo de laboratorio — datos de ejemplo, sin conexión a backend.</p>
   </footer>
+
+  <div class="modal-overlay" id="formModalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+      <div class="modal-header">
+        <h2 id="formModalTitle">Agregar perfil</h2>
+        <button type="button" class="modal-close" id="formModalClose" aria-label="Cerrar">✕</button>
+      </div>
+      <form id="profileForm" novalidate>
+        <div class="form-field">
+          <label for="fieldNombre">Nombre</label>
+          <input type="text" id="fieldNombre" name="nombre" required>
+        </div>
+        <div class="form-field">
+          <label for="fieldEdad">Edad</label>
+          <input type="number" id="fieldEdad" name="edad" min="18" max="99" required>
+        </div>
+        <div class="form-field">
+          <label for="fieldOficio">Oficio</label>
+          <select id="fieldOficio" name="oficio" required>
+            <option value="lena">Leña</option>
+            <option value="gasfiteria">Gasfitería</option>
+            <option value="electricidad">Electricidad</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="fieldExperiencia">Años de experiencia</label>
+          <input type="number" id="fieldExperiencia" name="experiencia" min="0" max="80" required>
+        </div>
+        <div class="form-field">
+          <label for="fieldZona">Zona</label>
+          <input type="text" id="fieldZona" name="zona" required>
+        </div>
+        <div class="form-field">
+          <label for="fieldCertificacion">Estado de certificación</label>
+          <select id="fieldCertificacion" name="certificacion" required>
+            <option value="verificado">Verificado</option>
+            <option value="tramite">En trámite</option>
+            <option value="sin_certificacion">Sin certificación</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancelFormBtn">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar perfil</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="detailModalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+      <div class="modal-header">
+        <h2 id="detailModalTitle">Detalle del perfil</h2>
+        <button type="button" class="modal-close" id="detailModalClose" aria-label="Cerrar">✕</button>
+      </div>
+      <div id="detailContent"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

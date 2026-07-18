@@ -65,6 +65,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 1.5rem;
 }
 
@@ -101,6 +107,23 @@ body {
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.profile-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.profile-card:focus-visible {
+  outline: 2px solid #1f6f50;
+  outline-offset: 2px;
+}
+
+.detail-body {
+  display: flex;
+  gap: 1rem;
 }
 
 .avatar {
@@ -158,6 +181,11 @@ body {
   color: #8a6d1d;
 }
 
+.badge.none {
+  background: #eef0f3;
+  color: #5b6472;
+}
+
 .details {
   list-style: none;
   margin: 0;
@@ -180,4 +208,113 @@ body {
   color: #8a92a3;
   font-size: 0.8rem;
   padding-bottom: 2rem;
+}
+
+.btn-primary {
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: #1f6f50;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #185a40;
+}
+
+.btn-secondary {
+  padding: 0.6rem 1.1rem;
+  border: 1px solid #d0d4dc;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f2430;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #f4f5f7;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 20, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.modal-close {
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #55606e;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3a4351;
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d0d4dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: inherit;
+  color: #1f2430;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }

@@ -179,6 +179,115 @@ a {
   line-height: 1.5;
 }
 
+/* ---------- Plans ---------- */
+
+.plans {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.plans h2 {
+  margin: 0 0 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--ink-900);
+}
+
+.plans-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.plans-column h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink-700);
+}
+
+.plan-card {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.plan-card:last-child {
+  margin-bottom: 0;
+}
+
+.plan-card--paid {
+  background: var(--card-bg);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.plan-card h4 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.plan-price {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.plan-period {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.plan-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  color: var(--ink-700);
+}
+
+.plan-card ul li::before {
+  content: "✓ ";
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.plans-note {
+  margin: 1.75rem 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink-500);
+}
+
+.gold-badge {
+  background: var(--accent);
+  color: #4a3714;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.corner-ribbon {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
 /* ---------- Product section (search / filters / list) ---------- */
 
 .container {
@@ -276,6 +385,7 @@ a {
 }
 
 .profile-card {
+  position: relative;
   display: flex;
   gap: 1rem;
   background: var(--card-bg);
@@ -298,9 +408,20 @@ a {
   outline-offset: 2px;
 }
 
+.profile-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light), var(--shadow-sm);
+}
+
+.profile-card.featured:hover {
+  box-shadow: 0 0 0 3px var(--accent-light), var(--shadow-md);
+}
+
 .detail-body {
+  position: relative;
   display: flex;
   gap: 1rem;
+  padding-top: 1.25rem;
 }
 
 .avatar {
@@ -313,6 +434,14 @@ a {
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
+  overflow: hidden;
+}
+
+.avatar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .info {
@@ -422,6 +551,45 @@ a {
   text-align: center;
   color: var(--ink-500);
   margin-top: 2rem;
+}
+
+.certifier {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+
+.certifier-label {
+  font-size: 0.72rem;
+  color: var(--ink-500);
+}
+
+.certifier-logo {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+
+.detail-photo {
+  margin: 1.25rem 0 0;
+}
+
+.detail-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.detail-photo figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ink-500);
+  text-align: center;
 }
 
 /* ---------- Footer ---------- */
@@ -627,6 +795,10 @@ body.modal-open {
 
   .steps {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .plans-columns {
+    grid-template-columns: 1fr 1fr;
   }
 
   .footer-inner {

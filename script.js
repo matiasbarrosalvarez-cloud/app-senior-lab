@@ -30,6 +30,12 @@ const CERT_INFO = {
   sin_certificacion: "Este profesional aún no registra una certificación formal en la plataforma.",
 };
 
+const CERTIFIERS = {
+  achs: { name: "ACHS", logo: "assets/certificadoras/achs.png" },
+  bureau_veritas: { name: "Bureau Veritas", logo: "assets/certificadoras/bureau-veritas.png" },
+  sec: { name: "SEC", logo: "assets/certificadoras/sec.png" },
+};
+
 const seedProfiles = [
   {
     id: "seed-1",
@@ -41,6 +47,7 @@ const seedProfiles = [
     experiencia: 12,
     zona: "Temuco, Araucanía",
     certificacion: "verificado",
+    certificadora: "achs",
   },
   {
     id: "seed-2",
@@ -49,9 +56,11 @@ const seedProfiles = [
     oficio: "gasfiteria",
     oficioLabel: "Gasfitera",
     icon: "🔧",
+    foto: "assets/fotos/gasfiteria-antes-despues.jpg",
     experiencia: 8,
     zona: "Providencia, Santiago",
     certificacion: "tramite",
+    certificadora: "bureau_veritas",
   },
   {
     id: "seed-3",
@@ -60,9 +69,12 @@ const seedProfiles = [
     oficio: "electricidad",
     oficioLabel: "Electricista",
     icon: "⚡",
+    foto: "assets/fotos/electricidad-antes-despues.jpg",
     experiencia: 20,
     zona: "Valparaíso",
     certificacion: "verificado",
+    certificadora: "sec",
+    destacado: true,
   },
   {
     id: "seed-4",
@@ -74,6 +86,7 @@ const seedProfiles = [
     experiencia: 6,
     zona: "Los Ángeles, Biobío",
     certificacion: "tramite",
+    destacado: true,
   },
 ];
 
@@ -150,7 +163,15 @@ function renderProfileBody(profile) {
 
   const avatar = document.createElement("div");
   avatar.className = "avatar";
-  avatar.textContent = profile.icon || ICONS[profile.oficio] || "🛠️";
+  if (profile.foto) {
+    const img = document.createElement("img");
+    img.className = "avatar-photo";
+    img.src = profile.foto;
+    img.alt = `Trabajo realizado por ${profile.nombre} — antes y después`;
+    avatar.appendChild(img);
+  } else {
+    avatar.textContent = profile.icon || ICONS[profile.oficio] || "🛠️";
+  }
 
   const info = document.createElement("div");
   info.className = "info";
@@ -178,13 +199,40 @@ function renderProfileBody(profile) {
   );
 
   info.append(header, oficioP, list);
+
+  const certifier = CERTIFIERS[profile.certificadora];
+  if (certifier) {
+    const certifierDiv = document.createElement("div");
+    certifierDiv.className = "certifier";
+
+    const label = document.createElement("span");
+    label.className = "certifier-label";
+    label.textContent = "Certificado por";
+
+    const logo = document.createElement("img");
+    logo.className = "certifier-logo";
+    logo.src = certifier.logo;
+    logo.alt = certifier.name;
+
+    certifierDiv.append(label, logo);
+    info.append(certifierDiv);
+  }
+
   frag.append(avatar, info);
+
+  if (profile.destacado) {
+    const ribbon = document.createElement("span");
+    ribbon.className = "gold-badge corner-ribbon";
+    ribbon.textContent = "★ Destacado";
+    frag.append(ribbon);
+  }
+
   return frag;
 }
 
 function createCardElement(profile) {
   const card = document.createElement("article");
-  card.className = "profile-card";
+  card.className = profile.destacado ? "profile-card featured" : "profile-card";
   card.dataset.oficio = profile.oficio;
   card.dataset.id = profile.id;
   card.tabIndex = 0;
@@ -282,8 +330,28 @@ profileForm.addEventListener("submit", (e) => {
 
 function openDetailModal(profile) {
   detailContent.innerHTML = "";
-  detailContent.className = "detail-body";
-  detailContent.append(renderProfileBody(profile));
+  detailContent.className = "";
+
+  const summary = document.createElement("div");
+  summary.className = "detail-body";
+  summary.append(renderProfileBody(profile));
+  detailContent.append(summary);
+
+  if (profile.foto) {
+    const figure = document.createElement("figure");
+    figure.className = "detail-photo";
+
+    const img = document.createElement("img");
+    img.src = profile.foto;
+    img.alt = `Trabajo realizado por ${profile.nombre} — antes y después`;
+
+    const caption = document.createElement("figcaption");
+    caption.textContent = "Antes y después de un trabajo realizado";
+
+    figure.append(img, caption);
+    detailContent.append(figure);
+  }
+
   detailModalOverlay.hidden = false;
   updateBodyScroll();
   detailModalClose.focus();

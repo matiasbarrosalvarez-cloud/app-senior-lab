@@ -3,42 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buscar Profesionales - Prototipo</title>
+<title>Gremio — Red de oficios certificados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header class="topbar">
-    <h1>Encuentra tu profesional de confianza</h1>
-    <p class="subtitle">Leña, gasfitería, electricidad y más — cerca de ti</p>
+    <div class="topbar-inner">
+      <p class="brand">Gremio</p>
+      <h1>El oficio certificado, al alcance de un clic</h1>
+      <p class="subtitle">La red profesional de expertos senior en oficios calificados — verificados y con trayectoria comprobable.</p>
+    </div>
   </header>
 
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <span class="stat-value">1.240+</span>
+        <span class="stat-label">oficios certificados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">180</span>
+        <span class="stat-label">empresas conectadas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">32</span>
+        <span class="stat-label">comunas con cobertura</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">4,8/5</span>
+        <span class="stat-label">valoración promedio</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="section-inner">
+      <p class="section-eyebrow">Cómo funciona</p>
+      <h2>Tres pasos para contratar con confianza</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Busca</h3>
+          <p>Filtra por oficio, zona o palabra clave para encontrar al profesional adecuado.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Verifica</h3>
+          <p>Revisa su estado de certificación, años de experiencia y trayectoria antes de decidir.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Contacta</h3>
+          <p>Comunícate directamente y coordina el trabajo con la confianza de un perfil validado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <main class="container">
+    <div class="product-section">
 
-    <section class="search-bar">
-      <input type="text" id="searchInput" placeholder="Buscar por nombre, oficio o zona...">
-      <button type="button" id="searchBtn">Buscar</button>
-    </section>
+      <section class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, oficio o zona...">
+        <button type="button" id="searchBtn">Buscar</button>
+      </section>
 
-    <section class="filters" id="filters">
-      <button class="filter-chip active" data-oficio="todos">Todos</button>
-      <button class="filter-chip" data-oficio="lena">Leña</button>
-      <button class="filter-chip" data-oficio="gasfiteria">Gasfitería</button>
-      <button class="filter-chip" data-oficio="electricidad">Electricidad</button>
-    </section>
+      <section class="filters" id="filters">
+        <button class="filter-chip active" data-oficio="todos">Todos</button>
+        <button class="filter-chip" data-oficio="lena">Leña</button>
+        <button class="filter-chip" data-oficio="gasfiteria">Gasfitería</button>
+        <button class="filter-chip" data-oficio="electricidad">Electricidad</button>
+      </section>
 
-    <section class="actions">
-      <button type="button" class="btn-primary" id="addProfileBtn">+ Agregar perfil</button>
-    </section>
+      <section class="actions">
+        <button type="button" class="btn-primary" id="addProfileBtn">+ Agregar perfil</button>
+      </section>
 
-    <section class="profile-list" id="profileList"></section>
+      <section class="profile-list" id="profileList"></section>
 
-    <p class="empty-state" id="emptyState" hidden>No se encontraron perfiles con esos criterios.</p>
+      <p class="empty-state" id="emptyState" hidden>No se encontraron perfiles con esos criterios.</p>
 
+    </div>
   </main>
 
   <footer class="footer">
-    <p>Prototipo de laboratorio — datos de ejemplo, sin conexión a backend.</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">Gremio</p>
+        <p class="footer-tagline">La red profesional de oficios certificados.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Sobre la app</h3>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Cómo funciona</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href="#">contacto@gremio.cl</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-note">Prototipo de laboratorio — datos de ejemplo, sin conexión a backend. © 2026 Gremio.</p>
   </footer>
 
   <div class="modal-overlay" id="formModalOverlay" hidden>

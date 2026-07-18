@@ -24,6 +24,12 @@ const BADGE_TEXT = {
   sin_certificacion: "— Sin certificación",
 };
 
+const CERT_INFO = {
+  verificado: "Certificación validada mediante ChileValora, el sistema nacional de certificación de competencias laborales.",
+  tramite: "El profesional inició su proceso de certificación ante ChileValora y está pendiente de validación final.",
+  sin_certificacion: "Este profesional aún no registra una certificación formal en la plataforma.",
+};
+
 const seedProfiles = [
   {
     id: "seed-1",
@@ -117,6 +123,28 @@ function makeDetailItem(label, value) {
   return li;
 }
 
+function createBadge(certificacion) {
+  const badge = document.createElement("span");
+  badge.className = `badge ${BADGE_CLASS[certificacion]}`;
+  badge.tabIndex = 0;
+  badge.setAttribute("role", "button");
+  badge.setAttribute("aria-label", `${BADGE_TEXT[certificacion]}. Más información`);
+  badge.appendChild(document.createTextNode(BADGE_TEXT[certificacion]));
+
+  const tooltip = document.createElement("span");
+  tooltip.className = "badge-tooltip";
+  tooltip.textContent = CERT_INFO[certificacion];
+  badge.appendChild(tooltip);
+
+  return badge;
+}
+
+function toggleBadgeTooltip(badge) {
+  const isOpen = badge.classList.contains("show-tooltip");
+  document.querySelectorAll(".badge.show-tooltip").forEach((b) => b.classList.remove("show-tooltip"));
+  if (!isOpen) badge.classList.add("show-tooltip");
+}
+
 function renderProfileBody(profile) {
   const frag = document.createDocumentFragment();
 
@@ -133,9 +161,7 @@ function renderProfileBody(profile) {
   const h2 = document.createElement("h2");
   h2.textContent = profile.nombre;
 
-  const badge = document.createElement("span");
-  badge.className = `badge ${BADGE_CLASS[profile.certificacion]}`;
-  badge.textContent = BADGE_TEXT[profile.certificacion];
+  const badge = createBadge(profile.certificacion);
 
   header.append(h2, badge);
 
@@ -292,5 +318,32 @@ document.addEventListener("keydown", (e) => {
   if (!formModalOverlay.hidden) closeFormModal();
   if (!detailModalOverlay.hidden) closeDetailModal();
 });
+
+document.addEventListener(
+  "click",
+  (e) => {
+    const badge = e.target.closest(".badge");
+    if (badge) {
+      e.stopPropagation();
+      toggleBadgeTooltip(badge);
+      return;
+    }
+    document.querySelectorAll(".badge.show-tooltip").forEach((b) => b.classList.remove("show-tooltip"));
+  },
+  true
+);
+
+document.addEventListener(
+  "keydown",
+  (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const badge = e.target.closest(".badge");
+    if (!badge) return;
+    e.preventDefault();
+    e.stopPropagation();
+    toggleBadgeTooltip(badge);
+  },
+  true
+);
 
 renderProfiles();

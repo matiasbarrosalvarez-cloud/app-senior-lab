@@ -46,9 +46,31 @@ a {
 }
 
 .topbar-inner {
-  max-width: 640px;
+  max-width: 960px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-text {
+  max-width: 560px;
   text-align: center;
+}
+
+.hero-photo {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 360px;
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
 .brand-logo {
@@ -551,13 +573,17 @@ a {
   margin-top: 2rem;
 }
 
-.certifier {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.certifier-wrapper {
   margin-top: 0.7rem;
   padding-top: 0.6rem;
   border-top: 1px dashed var(--border);
+}
+
+.certifier {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .certifier-label {
@@ -569,6 +595,13 @@ a {
   height: 18px;
   width: auto;
   display: block;
+}
+
+.certifier-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--ink-500);
 }
 
 .detail-photo {
@@ -805,5 +838,17 @@ body.modal-open {
 
   .topbar h1 {
     font-size: 2.35rem;
+  }
+}
+
+@media (min-width: 860px) {
+  .topbar-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .hero-text {
+    text-align: left;
   }
 }

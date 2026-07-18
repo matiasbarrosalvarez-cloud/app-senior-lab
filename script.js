@@ -34,6 +34,11 @@ const CERTIFIERS = {
   achs: { name: "ACHS", logo: "assets/certificadoras/achs.png" },
   bureau_veritas: { name: "Bureau Veritas", logo: "assets/certificadoras/bureau-veritas.png" },
   sec: { name: "SEC", logo: "assets/certificadoras/sec.png" },
+  chilevalora: {
+    name: "ChileValora",
+    logo: "assets/certificadoras/chilevalora.jpg",
+    note: "Certificación oficial del Estado de Chile",
+  },
 };
 
 const seedProfiles = [
@@ -44,10 +49,11 @@ const seedProfiles = [
     oficio: "lena",
     oficioLabel: "Leñero",
     icon: "🪓",
+    fotoTrabajando: "assets/fotos/lena-trabajando.jpg",
     experiencia: 12,
     zona: "Temuco, Araucanía",
     certificacion: "verificado",
-    certificadora: "achs",
+    certificadoras: ["achs", "chilevalora"],
   },
   {
     id: "seed-2",
@@ -61,7 +67,7 @@ const seedProfiles = [
     experiencia: 8,
     zona: "Providencia, Santiago",
     certificacion: "tramite",
-    certificadora: "bureau_veritas",
+    certificadoras: ["bureau_veritas", "chilevalora"],
   },
   {
     id: "seed-3",
@@ -75,7 +81,7 @@ const seedProfiles = [
     experiencia: 20,
     zona: "Valparaíso",
     certificacion: "verificado",
-    certificadora: "sec",
+    certificadoras: ["sec", "chilevalora"],
     destacado: true,
   },
   {
@@ -160,6 +166,42 @@ function toggleBadgeTooltip(badge) {
   if (!isOpen) badge.classList.add("show-tooltip");
 }
 
+function buildCertifierBlock(certificadoras) {
+  const certifiers = (certificadoras || []).map((key) => CERTIFIERS[key]).filter(Boolean);
+  if (certifiers.length === 0) return null;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "certifier-wrapper";
+
+  const row = document.createElement("div");
+  row.className = "certifier";
+
+  const label = document.createElement("span");
+  label.className = "certifier-label";
+  label.textContent = "Certificado por";
+  row.append(label);
+
+  certifiers.forEach((certifier) => {
+    const logo = document.createElement("img");
+    logo.className = "certifier-logo";
+    logo.src = certifier.logo;
+    logo.alt = certifier.name;
+    row.append(logo);
+  });
+
+  wrapper.append(row);
+
+  const certifierWithNote = certifiers.find((certifier) => certifier.note);
+  if (certifierWithNote) {
+    const note = document.createElement("p");
+    note.className = "certifier-note";
+    note.textContent = certifierWithNote.note;
+    wrapper.append(note);
+  }
+
+  return wrapper;
+}
+
 function renderProfileBody(profile) {
   const frag = document.createDocumentFragment();
 
@@ -202,23 +244,8 @@ function renderProfileBody(profile) {
 
   info.append(header, oficioP, list);
 
-  const certifier = CERTIFIERS[profile.certificadora];
-  if (certifier) {
-    const certifierDiv = document.createElement("div");
-    certifierDiv.className = "certifier";
-
-    const label = document.createElement("span");
-    label.className = "certifier-label";
-    label.textContent = "Certificado por";
-
-    const logo = document.createElement("img");
-    logo.className = "certifier-logo";
-    logo.src = certifier.logo;
-    logo.alt = certifier.name;
-
-    certifierDiv.append(label, logo);
-    info.append(certifierDiv);
-  }
+  const certifierBlock = buildCertifierBlock(profile.certificadoras);
+  if (certifierBlock) info.append(certifierBlock);
 
   frag.append(avatar, info);
 

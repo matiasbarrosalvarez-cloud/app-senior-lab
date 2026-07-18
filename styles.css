@@ -490,6 +490,18 @@ a {
   font-size: 0.9rem;
 }
 
+.modalidad-tag {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
 .badge {
   position: relative;
   font-size: 0.75rem;
@@ -621,6 +633,14 @@ a {
   font-size: 0.8rem;
   color: var(--ink-500);
   text-align: center;
+}
+
+.detail-action {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.85rem;
+  font-size: 1rem;
 }
 
 /* ---------- Standards strip ---------- */

@@ -12,6 +12,13 @@ const OFICIO_LABEL = {
   electricidad: "Electricidad",
 };
 
+const MODALIDAD_LABEL = {
+  servicio_puntual: "Servicio puntual",
+  por_proyecto: "Por proyecto",
+  por_hora: "Por hora",
+  charla_curso: "Charla o curso",
+};
+
 const BADGE_CLASS = {
   verificado: "verified",
   tramite: "pending",
@@ -54,6 +61,7 @@ const seedProfiles = [
     zona: "Temuco, Araucanía",
     certificacion: "verificado",
     certificadoras: ["achs", "chilevalora"],
+    modalidad: "servicio_puntual",
   },
   {
     id: "seed-2",
@@ -68,6 +76,7 @@ const seedProfiles = [
     zona: "Providencia, Santiago",
     certificacion: "tramite",
     certificadoras: ["bureau_veritas", "chilevalora"],
+    modalidad: "por_hora",
   },
   {
     id: "seed-3",
@@ -82,6 +91,7 @@ const seedProfiles = [
     zona: "Valparaíso",
     certificacion: "verificado",
     certificadoras: ["sec", "chilevalora"],
+    modalidad: "por_proyecto",
     destacado: true,
   },
   {
@@ -94,7 +104,22 @@ const seedProfiles = [
     experiencia: 6,
     zona: "Los Ángeles, Biobío",
     certificacion: "tramite",
+    modalidad: "servicio_puntual",
     destacado: true,
+  },
+  {
+    id: "seed-5",
+    nombre: "Roberto Silva",
+    edad: 61,
+    oficio: "electricidad",
+    oficioLabel: "Instructor de electricidad",
+    icon: "🎤",
+    fotoTrabajando: "assets/futuro/senior-dando-charla-en-colegio.jpg",
+    experiencia: 25,
+    zona: "Santiago",
+    certificacion: "verificado",
+    certificadoras: ["chilevalora"],
+    modalidad: "charla_curso",
   },
 ];
 
@@ -234,6 +259,10 @@ function renderProfileBody(profile) {
   oficioP.className = "oficio";
   oficioP.textContent = profile.oficioLabel || OFICIO_LABEL[profile.oficio];
 
+  const modalidadTag = document.createElement("span");
+  modalidadTag.className = "modalidad-tag";
+  modalidadTag.textContent = MODALIDAD_LABEL[profile.modalidad];
+
   const list = document.createElement("ul");
   list.className = "details";
   list.append(
@@ -242,7 +271,9 @@ function renderProfileBody(profile) {
     makeDetailItem("Zona", profile.zona)
   );
 
-  info.append(header, oficioP, list);
+  info.append(header, oficioP);
+  if (MODALIDAD_LABEL[profile.modalidad]) info.append(modalidadTag);
+  info.append(list);
 
   const certifierBlock = buildCertifierBlock(profile.certificadoras);
   if (certifierBlock) info.append(certifierBlock);
@@ -341,6 +372,7 @@ profileForm.addEventListener("submit", (e) => {
     edad: Number(data.get("edad")),
     oficio,
     oficioLabel: OFICIO_LABEL[oficio],
+    modalidad: data.get("modalidad"),
     experiencia: Number(data.get("experiencia")),
     zona: data.get("zona").trim(),
     certificacion: data.get("certificacion"),
@@ -382,8 +414,13 @@ function openDetailModal(profile) {
   detailContent.append(summary);
 
   if (profile.fotoTrabajando) {
+    const isCharla = profile.modalidad === "charla_curso";
     detailContent.append(
-      buildPhotoFigure(profile.fotoTrabajando, `${profile.nombre} trabajando en terreno`, "Trabajando en terreno")
+      buildPhotoFigure(
+        profile.fotoTrabajando,
+        isCharla ? `${profile.nombre} dando una charla` : `${profile.nombre} trabajando en terreno`,
+        isCharla ? "Dando una charla" : "Trabajando en terreno"
+      )
     );
   }
 
@@ -392,6 +429,12 @@ function openDetailModal(profile) {
       buildPhotoFigure(profile.foto, `Trabajo realizado por ${profile.nombre} — antes y después`, "Antes y después de un trabajo realizado")
     );
   }
+
+  const actionBtn = document.createElement("button");
+  actionBtn.type = "button";
+  actionBtn.className = "btn-primary detail-action";
+  actionBtn.textContent = profile.modalidad === "charla_curso" ? "Cotizar" : "Contactar";
+  detailContent.append(actionBtn);
 
   detailModalOverlay.hidden = false;
   updateBodyScroll();

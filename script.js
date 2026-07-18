@@ -1,4 +1,4 @@
-const STORAGE_KEY = "oficios_perfiles_v1";
+const STORAGE_KEY = "oficios_perfiles_v2";
 
 const ICONS = {
   lena: "🪓",

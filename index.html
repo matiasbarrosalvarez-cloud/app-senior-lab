@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscar Profesionales - Prototipo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h1>Encuentra tu profesional de confianza</h1>
+    <p class="subtitle">Leña, gasfitería, electricidad y más — cerca de ti</p>
+  </header>
+
+  <main class="container">
+
+    <section class="search-bar">
+      <input type="text" id="searchInput" placeholder="Buscar por nombre, oficio o zona...">
+      <button type="button" id="searchBtn">Buscar</button>
+    </section>
+
+    <section class="filters" id="filters">
+      <button class="filter-chip active" data-oficio="todos">Todos</button>
+      <button class="filter-chip" data-oficio="lena">Leña</button>
+      <button class="filter-chip" data-oficio="gasfiteria">Gasfitería</button>
+      <button class="filter-chip" data-oficio="electricidad">Electricidad</button>
+    </section>
+
+    <section class="profile-list" id="profileList">
+
+      <article class="profile-card" data-oficio="lena">
+        <div class="avatar">🪓</div>
+        <div class="info">
+          <div class="info-header">
+            <h2>Juan Pérez</h2>
+            <span class="badge verified">✔ Verificado</span>
+          </div>
+          <p class="oficio">Leñero</p>
+          <ul class="details">
+            <li><strong>Edad:</strong> 45 años</li>
+            <li><strong>Experiencia:</strong> 12 años</li>
+            <li><strong>Zona:</strong> Temuco, Araucanía</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="profile-card" data-oficio="gasfiteria">
+        <div class="avatar">🔧</div>
+        <div class="info">
+          <div class="info-header">
+            <h2>María González</h2>
+            <span class="badge pending">⏳ En trámite</span>
+          </div>
+          <p class="oficio">Gasfitera</p>
+          <ul class="details">
+            <li><strong>Edad:</strong> 38 años</li>
+            <li><strong>Experiencia:</strong> 8 años</li>
+            <li><strong>Zona:</strong> Providencia, Santiago</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="profile-card" data-oficio="electricidad">
+        <div class="avatar">⚡</div>
+        <div class="info">
+          <div class="info-header">
+            <h2>Carlos Muñoz</h2>
+            <span class="badge verified">✔ Verificado</span>
+          </div>
+          <p class="oficio">Electricista</p>
+          <ul class="details">
+            <li><strong>Edad:</strong> 52 años</li>
+            <li><strong>Experiencia:</strong> 20 años</li>
+            <li><strong>Zona:</strong> Valparaíso</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="profile-card" data-oficio="lena">
+        <div class="avatar">🪵</div>
+        <div class="info">
+          <div class="info-header">
+            <h2>Rosa Fuentes</h2>
+            <span class="badge pending">⏳ En trámite</span>
+          </div>
+          <p class="oficio">Leñera</p>
+          <ul class="details">
+            <li><strong>Edad:</strong> 41 años</li>
+            <li><strong>Experiencia:</strong> 6 años</li>
+            <li><strong>Zona:</strong> Los Ángeles, Biobío</li>
+          </ul>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="empty-state" id="emptyState" hidden>No se encontraron perfiles con esos criterios.</p>
+
+  </main>
+
+  <footer class="footer">
+    <p>Prototipo de laboratorio — datos de ejemplo, sin conexión a backend.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
